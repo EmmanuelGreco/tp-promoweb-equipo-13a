@@ -68,7 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="ElegirArticulo.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="IngresarCodigo.aspx" />
+    <Content Include="IngresarDatos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -79,11 +82,33 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ElegirArticulo.aspx.cs">
+      <DependentUpon>ElegirArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ElegirArticulo.aspx.designer.cs">
+      <DependentUpon>ElegirArticulo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IngresarCodigo.aspx.cs">
+      <DependentUpon>IngresarCodigo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IngresarCodigo.aspx.designer.cs">
+      <DependentUpon>IngresarCodigo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IngresarDatos.aspx.cs">
+      <DependentUpon>IngresarDatos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IngresarDatos.aspx.designer.cs">
+      <DependentUpon>IngresarDatos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
@@ -105,6 +130,16 @@
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Script\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{F330AC31-67D8-4885-83A0-83E418D872D5}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{930887FB-A415-44F9-8B1F-3ABA99F61BDB}</Project>
+      <Name>Negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

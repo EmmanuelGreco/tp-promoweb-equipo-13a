@@ -1,0 +1,15 @@
+-- -- USE master;
+-- -- GO;
+-- -- ALTER DATABASE PROMOS_DB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+-- -- DROP DATABASE PROMOS_DB;
+
+USE PROMOS_DB;
+SELECT * FROM ARTICULOS
+SELECT * FROM CATEGORIAS
+SELECT * FROM Clientes
+SELECT * FROM IMAGENES
+SELECT * FROM MARCAS
+SELECT * FROM Vouchers
+
+-- Para probar el carousel con cantidad variable de fotos
+update IMAGENES set IdArticulo = 2 where Id = 3

@@ -117,10 +117,10 @@ ALTER TABLE [dbo].[Vouchers] CHECK CONSTRAINT [FK_Vouchers_Clientes]
 GO
 
 insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Huawei'), ('Motorola')
-insert into CATEGORIAS values ('Mochilas'),('PerifÈricos'), ('Accesorios')
-insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseÒo elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999),
-('P03', 'Mouse Gamer Hero G502', 'SumÈrgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999),
-('P08', 'Teclado Mec·nico 75% Rk M75', 'Este teclado cuenta con un diseÒo compacto con 81 teclas, por lo que es f·cil de transportar y usar en cualquier lugar.', 2, 3, 185000)
+insert into CATEGORIAS values ('Mochilas'),('Perif√©ricos'), ('Accesorios')
+insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un dise√±o elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999),
+('P03', 'Mouse Gamer Hero G502', 'Sum√©rgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999),
+('P08', 'Teclado Mec√°nico 75% Rk M75', 'Este teclado cuenta con un dise√±o compacto con 81 teclas, por lo que es f√°cil de transportar y usar en cualquier lugar.', 2, 3, 185000)
 
 insert into imagenes values
 (1,'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
