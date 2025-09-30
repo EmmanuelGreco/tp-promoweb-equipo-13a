@@ -1,0 +1,6 @@
+!! IDEA: Hacer q todos los campos de texto aparezcan en disabled hasta que se ingresa el DNI. 
+Si el cliente ya está cargado, dejarlos "enabled" pero con los datos ya precargados, y si no lo está, dejarlos "enabled" pero en blanco.
+
+
+Si se traen los datos de un cliente y luego se modifica alguno, updatear el registro de ese cliente:
+por ejemplo, traigo dni 12345678 con nombre carlos perez. Si se cambia por Jose Martinez, actualizo el registro del DNI 12345678 para q quede Jose Martinez
