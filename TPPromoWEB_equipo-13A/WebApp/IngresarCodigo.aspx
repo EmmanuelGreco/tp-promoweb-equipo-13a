@@ -7,8 +7,13 @@
     <div class="row">
         <div class="col-6">
             <asp:Label runat="server" CssClass="form-label">Código:</asp:Label>
-            <asp:TextBox ID="CodigoVoucher" CssClass="form-control" runat="server"></asp:TextBox>
-        <asp:Button runat="server" type="button" class="btn btn-primary" Text="Utilizar cupón" />
+            <asp:TextBox ID="txtCodigoVoucher" CssClass="form-control" runat="server" Placeholder="Ingrese su código del Voucher..."></asp:TextBox>
+            <asp:Button ID="btnUtilizarCupon" runat="server" type="button" class="btn btn-primary" Text="Utilizar cupón" OnClick="btnUtilizarCupon_Click"/>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-4">
+                <asp:Label ID="lblError" runat="server" CssClass="text-danger"/>
+            </div>
         </div>
     </div>
 </asp:Content>

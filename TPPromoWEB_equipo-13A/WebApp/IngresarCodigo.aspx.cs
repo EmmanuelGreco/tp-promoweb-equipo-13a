@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Negocio;
+using Dominio;
 
 namespace WebApp
 {
@@ -11,7 +14,39 @@ namespace WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*if (!IsPostBack)
+                txtCodigoVoucher.Text = "Ingrese su código del Voucher...";
+            */
+        }
 
+        protected void btnUtilizarCupon_Click(object sender, EventArgs e)
+        {
+            string txtvoucher = txtCodigoVoucher.Text.Trim();
+            lblError.Text = "";
+
+            if (string.IsNullOrWhiteSpace(txtvoucher))
+            {
+                lblError.Text = "Debe ingresar un código de voucher!";
+                return;
+            }
+
+            VoucherNegocio voucherNegocio = new VoucherNegocio();
+            Voucher voucher = voucherNegocio.buscarVoucher(txtvoucher);
+
+            if (voucher == null)
+            {
+                lblError.Text = "Voucher inexistente!";
+                return;
+            }
+
+            if (!voucherNegocio.voucherEsCanjeable(voucher))
+            {
+                lblError.Text = "El voucher ya fue canjeado!";
+                return;
+            }
+            
+            Session.Add("voucher", voucher.CodigoVoucher.ToString());
+            Response.Redirect("ElegirArticulo.aspx");
         }
     }
 }
