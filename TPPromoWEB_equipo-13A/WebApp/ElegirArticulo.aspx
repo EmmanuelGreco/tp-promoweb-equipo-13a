@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="mb-3">Elegir Articulo</h1>
+    <h1 class="mb-3">Elegir un Artículo</h1>
 
     <asp:Label ID="lblError" runat="server" CssClass="text-danger mb-3"></asp:Label>
 

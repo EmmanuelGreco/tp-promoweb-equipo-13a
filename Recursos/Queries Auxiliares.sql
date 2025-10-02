@@ -15,3 +15,5 @@ SELECT * FROM Vouchers
 -- UPDATE IMAGENES SET IdArticulo = 2 WHERE Id = 3
 
 -- DELETE FROM Clientes WHERE Id = x
+
+-- UPDATE Vouchers SET IdCliente = NULL, FechaCanje = NULL, IdArticulo = NULL WHERE CodigoVoucher = 'Codigo02'

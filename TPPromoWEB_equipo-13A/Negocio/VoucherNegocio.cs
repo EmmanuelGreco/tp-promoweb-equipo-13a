@@ -49,6 +49,40 @@ namespace Negocio
             }
         }
 
+        public bool asignarVoucher(int idCliente, int idArticulo, string voucher)
+        {
+            AccesoDatos datos = null;
+            try
+            {
+                datos = new AccesoDatos();
+                datos.setearConsulta("UPDATE Vouchers SET IdCliente = @idCliente, FechaCanje = GETDATE(), IdArticulo = @idArticulo WHERE CodigoVoucher = @voucher;");
+                datos.setearParametro("@idCliente", idCliente);
+                datos.setearParametro("@idArticulo", idArticulo);
+                datos.setearParametro("@voucher", voucher);
+                datos.ejecutarLectura();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                if (datos != null)
+                {
+                    try
+                    {
+                        if (datos.Lector != null && !datos.Lector.IsClosed)
+                            datos.Lector.Close();
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
+
         public bool voucherEsCanjeable(Voucher voucher)
         {
             return voucher != null &&

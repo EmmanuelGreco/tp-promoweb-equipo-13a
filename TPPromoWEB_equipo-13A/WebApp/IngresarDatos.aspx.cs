@@ -47,16 +47,37 @@ namespace WebApp
                 cliente.Ciudad = ClienteCiudad.Text;
                 cliente.CP = int.Parse(ClienteCP.Text);
 
+                int idCliente;
+
                 if (clienteExistente == null)
                 {
                     negocio.agregar(cliente);
+
+                    Cliente clienteRecienAgregado = negocio.buscarPorDocumento(documento);
+                    idCliente = clienteRecienAgregado.Id;
                 }
                 else
                 {
                     negocio.modificar(cliente);
+
+                    idCliente = clienteExistente.Id;
                 }
 
-                Response.Redirect("RegistroExitoso.aspx"); // Hay que crearla
+                string voucher = Session["voucher"] as string;
+                int idArticulo = (int)Session["IdArticuloSeleccionado"];
+
+                VoucherNegocio voucherNegocio = new VoucherNegocio();
+
+                bool exito = voucherNegocio.asignarVoucher(idCliente, idArticulo, voucher);
+
+                if (!exito)
+                {
+                    lblError.Text = "Error al asignar el voucher. Intente nuevamente.";
+                    return;
+                }
+
+                Response.Redirect("CanjeExitoso.aspx");
+
             }
             catch (FormatException)
             {
