@@ -6,12 +6,12 @@
 USE PROMOS_DB;
 SELECT * FROM ARTICULOS
 SELECT * FROM CATEGORIAS
-SELECT * FROM Clientes
 SELECT * FROM IMAGENES
 SELECT * FROM MARCAS
+SELECT * FROM Clientes
 SELECT * FROM Vouchers
 
 -- Para probar el carousel con cantidad variable de fotos
--- update IMAGENES set IdArticulo = 2 where Id = 3
+-- UPDATE IMAGENES SET IdArticulo = 2 WHERE Id = 3
 
--- delete from Clientes where id = 3
+-- DELETE FROM Clientes WHERE Id = x

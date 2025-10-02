@@ -3,12 +3,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="mb-3">Ingesá tus datos:</h1>
+    <h1 class="mb-3">Ingrese sus datos:</h1>
+
+    <asp:Label ID="lblError" runat="server" CssClass="text-danger mb-3"></asp:Label>
+
     <div class="container">
         <div class="row">
             <div class="col">
-                <asp:Label runat="server" CssClass="form-label" for="ClienteDNI">DNI:</asp:Label>
-                <asp:TextBox ID="ClienteDNI" CssClass="form-control mb-3" placeholder="12345678" runat="server" TextMode="Number"></asp:TextBox>
+                <asp:Label runat="server" CssClass="form-label" for="ClienteDocumento">Documento: (Presione TAB para autocompletar, en caso de estar registrado)</asp:Label>
+                <asp:TextBox ID="ClienteDocumento" CssClass="form-control mb-3" placeholder="12345678" runat="server" TextMode="Number"
+                    AutoPostBack="true" OnTextChanged="ClienteDNI_TextChanged"></asp:TextBox>
             </div>
             <div class="col">
                 <asp:Label runat="server" CssClass="form-label" for="ClienteEmail">Correo:</asp:Label>
@@ -36,10 +40,10 @@
                 <asp:TextBox ID="ClienteCiudad" CssClass="form-control mb-3" placeholder="CABA" runat="server"></asp:TextBox>
             </div>
             <div class="col">
-                <asp:Label runat="server" CssClass="form-label" for="ClienteCodigoP">Código Postal:</asp:Label>
-                <asp:TextBox ID="ClienteCodigoP" CssClass="form-control mb-3" placeholder="1416" runat="server"></asp:TextBox>
+                <asp:Label runat="server" CssClass="form-label" for="ClienteCP">Código Postal:</asp:Label>
+                <asp:TextBox ID="ClienteCP" CssClass="form-control mb-3" placeholder="1416" runat="server"></asp:TextBox>
             </div>
         </div>
     </div>
-    <asp:Button runat="server" type="button" class="btn btn-primary" Text="Ingresar Datos" OnClick="EnviarFormulario"/>
+    <asp:Button runat="server" type="button" class="btn btn-primary" Text="Participar!" OnClick="EnviarFormulario"/>
 </asp:Content>

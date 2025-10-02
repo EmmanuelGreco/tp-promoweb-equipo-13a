@@ -5,6 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1 class="mb-3">Elegir Articulo</h1>
 
+    <asp:Label ID="lblError" runat="server" CssClass="text-danger mb-3"></asp:Label>
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <% 
             int idArticulo = 0;
@@ -51,7 +53,9 @@
                     <h5 class="card-subtitle mb-2 text-muted"><%: art.Marca %></h5>
                     <p class="card-text"><%: art.Descripcion %></p>
                     <h3><%:art.Precio.ToString("C") %></h3>
-                    <asp:Button runat="server" type="button" class="btn btn-primary" Text="Elegir este artículo" />
+                    <!-- Paso el Artículo por Query String -->
+                    <a class="btn btn-primary" href='IngresarDatos.aspx?idArticulo=<%: art.Id %>'>
+                        Elegir este artículo</a>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"><%: "Código de artículo: " + art.Codigo %></small>

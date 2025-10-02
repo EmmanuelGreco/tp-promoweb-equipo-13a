@@ -14,8 +14,23 @@ namespace WebApp
         public List<Articulo> listaArticulo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulo = negocio.listar();
+            // Una verificación, por si el Usuario llega a la página sin haber ingresado el Voucher.
+            if (Session["voucher"] == null)
+                Response.Redirect("IngresarCodigo.aspx");
+
+            // Manejo de errores si el listado de Artículos está vacio.
+            try
+            {
+                if (!IsPostBack)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    listaArticulo = negocio.listar();
+                }
+            }
+            catch (Exception)
+            {
+                lblError.Text = "Error! No se pudieron cargar los artículos! Intente nuevamente.";
+            }
         }
     }
 }

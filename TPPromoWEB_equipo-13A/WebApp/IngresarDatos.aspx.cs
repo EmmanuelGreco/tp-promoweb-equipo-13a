@@ -2,10 +2,12 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace WebApp
 {
@@ -13,29 +15,103 @@ namespace WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                // Validar que llega idArticulo por Query String.
+                if (Request.QueryString["idArticulo"] == null)
+                {
+                    Response.Redirect("ElegirArticulo.aspx");
+                    return;
+                }
 
+                Session["IdArticuloSeleccionado"] = int.Parse(Request.QueryString["idArticulo"]);
+            }
         }
 
         protected void EnviarFormulario(object sender, EventArgs e)
         {
             try
             {
-            Cliente cliente = new Cliente();
-            cliente.Documento = int.Parse(ClienteDNI.Text);
-            cliente.Nombre = ClienteNombre.Text;
-            cliente.Apellido = ClienteApellido.Text;
-            cliente.Email = ClienteEmail.Text;
-            cliente.Direccion = ClienteDireccion.Text;
-            cliente.Ciudad = ClienteCiudad.Text;
-            cliente.CodigoPostal = ClienteCodigoP.Text;
-            
-            ClienteNegocio negocio = new ClienteNegocio();
-            negocio.agregar(cliente);
+                string documento = ClienteDocumento.Text;
+
+                ClienteNegocio negocio = new ClienteNegocio();
+                Cliente clienteExistente = negocio.buscarPorDocumento(documento);
+
+                Cliente cliente = new Cliente();
+
+                cliente.Documento = ClienteDocumento.Text;
+                cliente.Nombre = ClienteNombre.Text;
+                cliente.Apellido = ClienteApellido.Text;
+                cliente.Email = ClienteEmail.Text;
+                cliente.Direccion = ClienteDireccion.Text;
+                cliente.Ciudad = ClienteCiudad.Text;
+                cliente.CP = int.Parse(ClienteCP.Text);
+
+                if (clienteExistente == null)
+                {
+                    negocio.agregar(cliente);
+                }
+                else
+                {
+                    negocio.modificar(cliente);
+                }
+
+                Response.Redirect("RegistroExitoso.aspx"); // Hay que crearla
             }
-            catch (Exception)
+            catch (FormatException)
             {
-                throw;
-            } 
+                lblError.Text = "El Código Postal debe ser un número válido!";
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error al registrar cliente: " + ex.Message;
+            }
+        }
+
+        protected void ClienteDNI_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string documento = ClienteDocumento.Text;
+
+                if (string.IsNullOrWhiteSpace(documento))
+                {
+                    lblError.Text = "Debe ingresar un Documento válido.";
+                    return;
+                }
+
+                //int documento = int.Parse(ClienteDNI.Text); Cuando lo usabamos con tipo int.
+
+                ClienteNegocio negocio = new ClienteNegocio();
+                Cliente clienteExistente = negocio.buscarPorDocumento(documento);
+
+                if (clienteExistente != null)
+                {
+                    ClienteNombre.Text = clienteExistente.Nombre;
+                    ClienteApellido.Text = clienteExistente.Apellido;
+                    ClienteEmail.Text = clienteExistente.Email;
+                    ClienteDireccion.Text = clienteExistente.Direccion;
+                    ClienteCiudad.Text = clienteExistente.Ciudad;
+                    ClienteCP.Text = clienteExistente.CP.ToString();
+
+                    lblError.Text = "Cliente encontrado! Verifique sus datos.";
+                }
+                else
+                {
+                    ClienteNombre.Text = "";
+                    ClienteApellido.Text = "";
+                    ClienteEmail.Text = "";
+                    ClienteDireccion.Text = "";
+                    ClienteCiudad.Text = "";
+                    ClienteCP.Text = "";
+
+                    lblError.Text = "No existe cliente con ese DNI. Complete el formulario para registrarse.";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error al buscar cliente: " + ex.Message;
+            }
         }
     }
 }

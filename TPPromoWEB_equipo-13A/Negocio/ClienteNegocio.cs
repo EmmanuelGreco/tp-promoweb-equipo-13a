@@ -28,7 +28,7 @@ namespace Negocio
                 datos.setearParametro("@email", nuevo.Email);
                 datos.setearParametro("@direccion", nuevo.Direccion);
                 datos.setearParametro("@ciudad", nuevo.Ciudad);
-                datos.setearParametro("@cp", nuevo.CodigoPostal);
+                datos.setearParametro("@cp", nuevo.CP);
                 
                 datos.ejecutarAccion();
             }
@@ -42,5 +42,76 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Cliente buscarPorDocumento(string documento)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT * FROM Clientes WHERE Documento = @documento");
+                datos.setearParametro("@documento", documento);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Cliente cliente = new Cliente();
+                    cliente.Id = (int)datos.Lector["Id"];
+                    cliente.Documento = datos.Lector["Documento"].ToString();
+                    cliente.Nombre = datos.Lector["Nombre"].ToString();
+                    cliente.Apellido = datos.Lector["Apellido"].ToString();
+                    cliente.Email = datos.Lector["Email"].ToString();
+                    cliente.Direccion = datos.Lector["Direccion"].ToString();
+                    cliente.Ciudad = datos.Lector["Ciudad"].ToString();
+                    cliente.CP = (int)datos.Lector["CP"];
+
+                    return cliente;
+                }
+
+                return null; // No existe
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificar(Cliente cliente)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta(@"UPDATE Clientes
+                                        SET Nombre = @nombre,
+                                            Apellido = @apellido,
+                                            Email = @email,
+                                            Direccion = @direccion,
+                                            Ciudad = @ciudad,
+                                            CP = @cp
+                                        WHERE Documento = @documento");
+
+                datos.setearParametro("@nombre", cliente.Nombre);
+                datos.setearParametro("@apellido", cliente.Apellido);
+                datos.setearParametro("@email", cliente.Email);
+                datos.setearParametro("@direccion", cliente.Direccion);
+                datos.setearParametro("@ciudad", cliente.Ciudad);
+                datos.setearParametro("@cp", cliente.CP);
+                datos.setearParametro("@documento", cliente.Documento);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
