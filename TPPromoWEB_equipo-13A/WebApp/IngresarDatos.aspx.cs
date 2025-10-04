@@ -32,20 +32,24 @@ namespace WebApp
         {
             try
             {
-                string documento = ClienteDocumento.Text;
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
+                string documento = txtClienteDocumento.Text;
 
                 ClienteNegocio negocio = new ClienteNegocio();
                 Cliente clienteExistente = negocio.buscarPorDocumento(documento);
 
                 Cliente cliente = new Cliente();
 
-                cliente.Documento = ClienteDocumento.Text;
-                cliente.Nombre = ClienteNombre.Text;
-                cliente.Apellido = ClienteApellido.Text;
-                cliente.Email = ClienteEmail.Text;
-                cliente.Direccion = ClienteDireccion.Text;
-                cliente.Ciudad = ClienteCiudad.Text;
-                cliente.CP = int.Parse(ClienteCP.Text);
+                cliente.Documento = txtClienteDocumento.Text;
+                cliente.Nombre = txtClienteNombre.Text;
+                cliente.Apellido = txtClienteApellido.Text;
+                cliente.Email = txtClienteEmail.Text;
+                cliente.Direccion = txtClienteDireccion.Text;
+                cliente.Ciudad = txtClienteCiudad.Text;
+                cliente.CP = int.Parse(txtClienteCP.Text);
 
                 int idCliente;
 
@@ -85,53 +89,50 @@ namespace WebApp
             }
             catch (Exception ex)
             {
-                lblError.Text = "Error al registrar cliente: " + ex.Message;
+                lblError.Text = "Error al registrar el cliente: " + ex.Message;
             }
         }
 
-        protected void ClienteDNI_TextChanged(object sender, EventArgs e)
+        protected void ClienteDocumento_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                string documento = ClienteDocumento.Text;
+                string documento = txtClienteDocumento.Text;
+
+                errorDNI.IsValid = true;
 
                 if (string.IsNullOrWhiteSpace(documento))
                 {
-                    lblError.Text = "Debe ingresar un Documento válido.";
+                    errorDNI.IsValid = false;
+                    errorDNI.ErrorMessage = "¡Debe ingresar un Documento válido!";
                     return;
                 }
-
-                //int documento = int.Parse(ClienteDNI.Text); Cuando lo usabamos con tipo int.
 
                 ClienteNegocio negocio = new ClienteNegocio();
                 Cliente clienteExistente = negocio.buscarPorDocumento(documento);
 
                 if (clienteExistente != null)
                 {
-                    ClienteNombre.Text = clienteExistente.Nombre;
-                    ClienteApellido.Text = clienteExistente.Apellido;
-                    ClienteEmail.Text = clienteExistente.Email;
-                    ClienteDireccion.Text = clienteExistente.Direccion;
-                    ClienteCiudad.Text = clienteExistente.Ciudad;
-                    ClienteCP.Text = clienteExistente.CP.ToString();
+                    txtClienteNombre.Text = clienteExistente.Nombre;
+                    txtClienteApellido.Text = clienteExistente.Apellido;
+                    txtClienteEmail.Text = clienteExistente.Email;
+                    txtClienteDireccion.Text = clienteExistente.Direccion;
+                    txtClienteCiudad.Text = clienteExistente.Ciudad;
+                    txtClienteCP.Text = clienteExistente.CP.ToString();
 
-                    lblError.Text = "Cliente encontrado! Verifique sus datos.";
+                    errorDNI.IsValid = false;
+                    errorDNI.ErrorMessage = "¡Cliente encontrado! Verifique sus datos.";
                 }
                 else
                 {
-                    ClienteNombre.Text = "";
-                    ClienteApellido.Text = "";
-                    ClienteEmail.Text = "";
-                    ClienteDireccion.Text = "";
-                    ClienteCiudad.Text = "";
-                    ClienteCP.Text = "";
-
-                    lblError.Text = "No existe cliente con ese DNI. Complete el formulario para registrarse.";
+                    errorDNI.IsValid = false;
+                    errorDNI.ErrorMessage = "No existe un cliente con ese DNI. Complete el formulario para registrarse.";
                 }
             }
             catch (Exception ex)
             {
-                lblError.Text = "Error al buscar cliente: " + ex.Message;
+                errorDNI.IsValid = false;
+                errorDNI.ErrorMessage = "Error al buscar cliente: " + ex.Message;
             }
         }
     }

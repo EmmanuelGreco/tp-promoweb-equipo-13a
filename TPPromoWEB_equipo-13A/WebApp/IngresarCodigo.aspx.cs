@@ -22,11 +22,13 @@ namespace WebApp
         protected void btnUtilizarCupon_Click(object sender, EventArgs e)
         {
             string txtvoucher = txtCodigoVoucher.Text.Trim();
-            lblError.Text = "";
+
+            errorVoucher.IsValid = true;
 
             if (string.IsNullOrWhiteSpace(txtvoucher))
             {
-                lblError.Text = "Debe ingresar un código de voucher!";
+                errorVoucher.IsValid = false;
+                errorVoucher.ErrorMessage = "¡Debe ingresar un código de Voucher!";
                 return;
             }
 
@@ -35,17 +37,19 @@ namespace WebApp
 
             if (voucher == null)
             {
-                lblError.Text = "Voucher inexistente!";
+                errorVoucher.IsValid = false;
+                errorVoucher.ErrorMessage = "¡Voucher inexistente!";
                 return;
             }
 
             if (!voucherNegocio.voucherEsCanjeable(voucher))
             {
-                lblError.Text = "El voucher ya fue canjeado!";
+                errorVoucher.IsValid = false;
+                errorVoucher.ErrorMessage = "¡El Voucher ya fue canjeado!";
                 return;
             }
-            
-            Session.Add("voucher", voucher.CodigoVoucher.ToString());
+
+            Session["voucher"] = voucher.CodigoVoucher.ToString();
             Response.Redirect("ElegirArticulo.aspx");
         }
     }

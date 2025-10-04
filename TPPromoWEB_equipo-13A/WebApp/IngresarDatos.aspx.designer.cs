@@ -24,66 +24,75 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
-        /// Control ClienteDocumento.
+        /// Control txtClienteDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClienteDocumento;
+        protected global::System.Web.UI.WebControls.TextBox txtClienteDocumento;
 
         /// <summary>
-        /// Control ClienteEmail.
+        /// Control errorDNI.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClienteEmail;
+        protected global::System.Web.UI.WebControls.CustomValidator errorDNI;
 
         /// <summary>
-        /// Control ClienteNombre.
+        /// Control txtClienteEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClienteNombre;
+        protected global::System.Web.UI.WebControls.TextBox txtClienteEmail;
 
         /// <summary>
-        /// Control ClienteApellido.
+        /// Control txtClienteNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClienteApellido;
+        protected global::System.Web.UI.WebControls.TextBox txtClienteNombre;
 
         /// <summary>
-        /// Control ClienteDireccion.
+        /// Control txtClienteApellido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClienteDireccion;
+        protected global::System.Web.UI.WebControls.TextBox txtClienteApellido;
 
         /// <summary>
-        /// Control ClienteCiudad.
+        /// Control txtClienteDireccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClienteCiudad;
+        protected global::System.Web.UI.WebControls.TextBox txtClienteDireccion;
 
         /// <summary>
-        /// Control ClienteCP.
+        /// Control txtClienteCiudad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ClienteCP;
+        protected global::System.Web.UI.WebControls.TextBox txtClienteCiudad;
+
+        /// <summary>
+        /// Control txtClienteCP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClienteCP;
     }
 }
