@@ -16,10 +16,12 @@
             <%--DOCUMENTO--%>
             <div class="col mb-2 d-flex flex-column">
                 <asp:Label runat="server" CssClass="form-label" for="ClienteDocumento">Documento: (Presione TAB para autocompletar, en caso de estar registrado)</asp:Label>
-                <asp:TextBox ID="txtClienteDocumento" CssClass="form-control" placeholder="12345678" runat="server" TextMode="SingleLine" MaxLength="50"
+                <asp:TextBox ID="txtClienteDocumento" CssClass="form-control" placeholder="12345678" runat="server" TextMode="SingleLine" MaxLength="8"
                     AutoPostBack="true" OnTextChanged="ClienteDocumento_TextChanged"></asp:TextBox>
                 <div style="min-height: 1.5em;">
                     <asp:RequiredFieldValidator ErrorMessage="¡El Documento es requerido!" ForeColor="Red" Display="Dynamic" ControlToValidate="txtClienteDocumento" runat="server" />
+                    <asp:RegularExpressionValidator ErrorMessage="¡El Documento debe ser numérico de 8 cifras! En caso de ser necesario, completar con 0 a la izquierda." ForeColor="Red" Display="Dynamic" 
+                        ValidationExpression="^\d{8}$" ControlToValidate="txtClienteDocumento" runat="server" />
                     <asp:CustomValidator ID="errorDNI" ControlToValidate="txtClienteDocumento" ErrorMessage="Aca va el Error" ForeColor="Red" Display="Dynamic" EnableClientScript="false" runat="server" />
                 </div>
             </div>

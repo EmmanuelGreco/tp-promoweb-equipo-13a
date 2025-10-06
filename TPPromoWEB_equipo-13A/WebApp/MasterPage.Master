@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="es-AR">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Promo WEB</title>
@@ -36,7 +36,7 @@
                 </asp:ContentPlaceHolder>
             <footer>
                 <hr />
-                Trabajo Práctico N°4 - Emmanuel Greco - Pedro Taquino - 2025
+                Trabajo Práctico N°4 "Promo WEB" - Greco, Emmanuel - Taquino, Pedro - 2025
             </footer>
             </div>
         </div>

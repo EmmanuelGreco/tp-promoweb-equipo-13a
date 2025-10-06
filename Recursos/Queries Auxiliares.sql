@@ -24,4 +24,4 @@ SELECT * FROM Vouchers
 
 -- DELETE FROM Clientes WHERE Id = x
 
--- UPDATE Vouchers SET IdCliente = NULL, FechaCanje = NULL, IdArticulo = NULL WHERE CodigoVoucher = 'Codigo04'
+-- UPDATE Vouchers SET IdCliente = NULL, FechaCanje = NULL, IdArticulo = NULL WHERE CodigoVoucher = 'Codigo02'
