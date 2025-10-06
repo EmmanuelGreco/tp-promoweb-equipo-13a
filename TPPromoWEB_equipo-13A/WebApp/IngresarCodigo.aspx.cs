@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Negocio;
-using Dominio;
 
 namespace WebApp
 {
@@ -14,9 +15,6 @@ namespace WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*if (!IsPostBack)
-                txtCodigoVoucher.Text = "Ingrese su código del Voucher...";
-            */
         }
 
         protected void btnUtilizarCupon_Click(object sender, EventArgs e)
@@ -28,17 +26,33 @@ namespace WebApp
             if (string.IsNullOrWhiteSpace(txtvoucher))
             {
                 errorVoucher.IsValid = false;
-                errorVoucher.ErrorMessage = "¡Debe ingresar un código de Voucher!";
+                errorVoucher.ErrorMessage = "¡Debe ingresar un código de voucher!";
                 return;
             }
 
             VoucherNegocio voucherNegocio = new VoucherNegocio();
-            Voucher voucher = voucherNegocio.buscarVoucher(txtvoucher);
+            Voucher voucher = new Voucher();
+            try
+            {
+                voucher = voucherNegocio.buscarVoucher(txtvoucher);
+            }
+            catch (Exception ex)
+            {
+                conexionDB.Attributes["style"] = "display: block";
+
+                return;
+            }
 
             if (voucher == null)
             {
                 errorVoucher.IsValid = false;
                 errorVoucher.ErrorMessage = "¡Voucher inexistente!";
+
+                //Setear refresh a 3 segundos. 
+                HtmlMeta meta = new HtmlMeta();
+                meta.HttpEquiv = "refresh";
+                meta.Content = "3;url=Default.aspx";
+                Page.Header.Controls.Add(meta);
                 return;
             }
 

@@ -10,7 +10,7 @@
                 <p class="card-text">La operación se completó correctamente.<br></p>
                 <asp:Label ID="lblMensaje" runat="server" CssClass="card-text"></asp:Label>
             </div>
-                <a href="IngresarCodigo.aspx" class="btn btn-primary mt-3">Ir a Ingresar nuevo Código</a>
+                <a href="IngresarCodigo.aspx" class="btn btn-primary mt-3">Ingresar otro código...</a>
         </div>
     </div>
 </asp:Content>

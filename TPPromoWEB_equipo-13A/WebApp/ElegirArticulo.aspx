@@ -3,13 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="mb-3">Elegir un Artículo</h1>
+    <h1 class="mb-3">Elija un artículo:</h1>
 
     <asp:Label ID="lblError" runat="server" CssClass="text-danger mb-3"></asp:Label>
 
+
+    <% 
+        int idArticulo = 0;
+        if (listaArticulo != null)
+        { %>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <% 
-            int idArticulo = 0;
+        <%
             foreach (Dominio.Articulo art in listaArticulo)
             {
                 string idCarousel = "carouselArt" + idArticulo; %>
@@ -19,12 +23,15 @@
                     <div class="carousel-indicators">
                         <% 
                             int idImagen = 0;
-                            foreach (Dominio.Imagen img in art.ListaImagen)
+                            if (art.ListaImagen.Count > 1)
                             {
+                                foreach (Dominio.Imagen img in art.ListaImagen)
+                                {
                         %>
                         <button type="button" style="filter: invert(1)" data-bs-target="#<%: idCarousel %>" data-bs-slide-to="<%: idImagen %>" aria-label="Slide <%: idImagen + 1 %>" <%:idImagen == 0 ? "class=active aria-current=true" : ""  %>></button>
                         <% idImagen++;
-                            } %>
+                                }
+                            }%>
                     </div>
                     <div class="carousel-inner">
                         <%
@@ -38,6 +45,8 @@
                         <% idImagen++;
                             }%>
                     </div>
+                    <% if (art.ListaImagen.Count > 1)
+                        {%>
                     <button class="carousel-control-prev" style="filter: invert(1)" type="button" data-bs-target="#<%: idCarousel %>" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
@@ -46,6 +55,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+                    <%} %>
                 </div>
                 <div class="card-body">
                     <p class="card-subtitle text-muted fst-italic"><%: art.Categoria %></p>
@@ -54,8 +64,7 @@
                     <p class="card-text"><%: art.Descripcion %></p>
                     <h3><%:art.Precio.ToString("C") %></h3>
                     <!-- Paso el Artículo por Query String -->
-                    <a class="btn btn-primary" href='IngresarDatos.aspx?idArticulo=<%: art.Id %>'>
-                        Elegir este artículo</a>
+                    <a class="btn btn-primary" href='IngresarDatos.aspx?idArticulo=<%: art.Id %>'>Elegir este artículo</a>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"><%: "Código de artículo: " + art.Codigo %></small>
@@ -66,4 +75,13 @@
                 idArticulo++;
             } %>
     </div>
+    <%
+        }
+        else
+        { %>
+    <div class="alert alert-danger" role="alert">
+        No se pudo establecer una conexión con la base de datos. Inténtelo nuevamente más tarde.
+    </div>
+    <% return;
+        }%>
 </asp:Content>

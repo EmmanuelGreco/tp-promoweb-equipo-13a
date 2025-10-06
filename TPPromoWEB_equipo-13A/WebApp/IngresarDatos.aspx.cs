@@ -1,8 +1,10 @@
 ﻿using Dominio;
+using negocio;
 using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,10 +19,10 @@ namespace WebApp
         {
             if (!IsPostBack)
             {
-                // Validar que llega idArticulo por Query String.
+                //Validar que llega idArticulo por Query String.
                 if (Request.QueryString["idArticulo"] == null)
                 {
-                    Response.Redirect("ElegirArticulo.aspx");
+                    Response.Redirect("Default.aspx");
                     return;
                 }
 
@@ -68,6 +70,8 @@ namespace WebApp
                 }
 
                 string voucher = Session["voucher"] as string;
+                if (Session["voucher"] == null)
+                    Response.Redirect("Default.aspx");
                 int idArticulo = (int)Session["IdArticuloSeleccionado"];
 
                 VoucherNegocio voucherNegocio = new VoucherNegocio();
@@ -80,6 +84,31 @@ namespace WebApp
                     return;
                 }
 
+
+                EmailService emailService = new EmailService();
+                // TUVE QUE VOLVER A LLAMAR A LA DB XQ PASAR EL NOMBRE DEL PRODUCTO DESDE "ELEGIRPRODUCTOS" ERA MUY DIFCIL, CON COSAS QUE NO VIMOS. 
+                //NO QUISE METER UN MONTON DE GPT QUE NO ENTENDÍ BIEN, Y ASI FUNCIONA.
+                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+                List<Articulo> listaArticulos = articuloNegocio.listar();
+                string nombreArticulo = "";
+                foreach (Articulo art in listaArticulos)
+                {
+                    if (art.Id == idArticulo)
+                        nombreArticulo = art.Nombre;
+                }
+                string email = cliente.Email;
+
+                emailService.armarCorreo(email, "¡Voucher canjeado exitosamente!", "Utilizaste el código \"" + voucher + "\" para participar por el siguiente producto: \"" + nombreArticulo + "\". ¡Muchas gracias por tu apoyo!");
+                try
+                {
+                    emailService.enviarEmail();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+
                 Response.Redirect("CanjeExitoso.aspx");
 
             }
@@ -89,7 +118,7 @@ namespace WebApp
             }
             catch (Exception ex)
             {
-                lblError.Text = "Error al registrar el cliente: " + ex.Message;
+                conexionDB.Attributes["style"] = "display: block";
             }
         }
 
@@ -104,6 +133,7 @@ namespace WebApp
                 if (string.IsNullOrWhiteSpace(documento))
                 {
                     errorDNI.IsValid = false;
+                    errorDNI.ForeColor = Color.FromName("Red");
                     errorDNI.ErrorMessage = "¡Debe ingresar un Documento válido!";
                     return;
                 }
@@ -113,26 +143,34 @@ namespace WebApp
 
                 if (clienteExistente != null)
                 {
+                    txtClienteEmail.Text = clienteExistente.Email;
                     txtClienteNombre.Text = clienteExistente.Nombre;
                     txtClienteApellido.Text = clienteExistente.Apellido;
-                    txtClienteEmail.Text = clienteExistente.Email;
                     txtClienteDireccion.Text = clienteExistente.Direccion;
                     txtClienteCiudad.Text = clienteExistente.Ciudad;
                     txtClienteCP.Text = clienteExistente.CP.ToString();
 
                     errorDNI.IsValid = false;
+                    errorDNI.ForeColor = Color.FromName("Green");
                     errorDNI.ErrorMessage = "¡Cliente encontrado! Verifique sus datos.";
+
+                    txtClienteEmail.ReadOnly = false;
+                    txtClienteNombre.ReadOnly = false;
+                    txtClienteApellido.ReadOnly = false;
+                    txtClienteDireccion.ReadOnly = false;
+                    txtClienteCiudad.ReadOnly = false;
+                    txtClienteCP.ReadOnly = false;
                 }
                 else
                 {
                     errorDNI.IsValid = false;
+                    errorDNI.ForeColor = Color.FromName("Red");
                     errorDNI.ErrorMessage = "No existe un cliente con ese DNI. Complete el formulario para registrarse.";
                 }
             }
             catch (Exception ex)
             {
-                errorDNI.IsValid = false;
-                errorDNI.ErrorMessage = "Error al buscar cliente: " + ex.Message;
+                conexionDB.Attributes["style"] = "display: block";
             }
         }
     }

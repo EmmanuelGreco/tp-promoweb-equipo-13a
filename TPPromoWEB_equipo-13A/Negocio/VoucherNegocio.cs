@@ -75,9 +75,9 @@ namespace Negocio
                         if (datos.Lector != null && !datos.Lector.IsClosed)
                             datos.Lector.Close();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        throw;
+                        throw ex;
                     }
                 }
             }

@@ -15,7 +15,8 @@
         <div>
             <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4" data-bs-theme="dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">DEBUG</a>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077170.png" style="height: 64px" runat="server" />
+                    <%--<a class="navbar-brand" href="#">DEBUG</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -27,7 +28,7 @@
                             <a class="nav-link" href="/IngresarDatos.aspx">Ingresar Datos</a>
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
             </nav>
             <div class="container">
