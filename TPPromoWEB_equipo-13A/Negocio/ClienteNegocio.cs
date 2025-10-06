@@ -20,7 +20,7 @@ namespace Negocio
                 string.IsNullOrEmpty(nuevo.Direccion) ||
                 string.IsNullOrEmpty(nuevo.Ciudad) ||
                 string.IsNullOrEmpty(nuevo.CP.ToString()) ||
-                nuevo.Documento.Length > 50 ||
+                nuevo.Documento.Length > 8 ||
                 nuevo.Email.Length > 50 ||
                 nuevo.Nombre.Length > 50 ||
                 nuevo.Apellido.Length > 50 ||
@@ -105,7 +105,7 @@ namespace Negocio
                 string.IsNullOrEmpty(cliente.Direccion) ||
                 string.IsNullOrEmpty(cliente.Ciudad) ||
                 string.IsNullOrEmpty(cliente.CP.ToString()) ||
-                cliente.Documento.Length > 50 || 
+                cliente.Documento.Length > 8 || 
                 cliente.Email.Length > 50 ||
                 cliente.Nombre.Length > 50||
                 cliente.Apellido.Length > 50 ||
