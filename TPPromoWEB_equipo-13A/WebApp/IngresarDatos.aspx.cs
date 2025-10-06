@@ -153,13 +153,6 @@ namespace WebApp
                     errorDNI.IsValid = false;
                     errorDNI.ForeColor = Color.FromName("Green");
                     errorDNI.ErrorMessage = "¡Cliente encontrado! Verifique sus datos.";
-
-                    txtClienteEmail.ReadOnly = false;
-                    txtClienteNombre.ReadOnly = false;
-                    txtClienteApellido.ReadOnly = false;
-                    txtClienteDireccion.ReadOnly = false;
-                    txtClienteCiudad.ReadOnly = false;
-                    txtClienteCP.ReadOnly = false;
                 }
                 else
                 {
@@ -167,6 +160,12 @@ namespace WebApp
                     errorDNI.ForeColor = Color.FromName("Red");
                     errorDNI.ErrorMessage = "No existe un cliente con ese DNI. Complete el formulario para registrarse.";
                 }
+                txtClienteEmail.ReadOnly = false;
+                txtClienteNombre.ReadOnly = false;
+                txtClienteApellido.ReadOnly = false;
+                txtClienteDireccion.ReadOnly = false;
+                txtClienteCiudad.ReadOnly = false;
+                txtClienteCP.ReadOnly = false;
             }
             catch (Exception ex)
             {

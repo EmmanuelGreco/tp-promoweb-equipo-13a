@@ -12,7 +12,23 @@ namespace Negocio
         public void agregar(Cliente nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
-            
+            //Chequeo masivo de no null, no empty, y no pasado de cantidad de char maximo -- osea, valido
+            if (string.IsNullOrEmpty(nuevo.Documento) ||
+                string.IsNullOrEmpty(nuevo.Email) ||
+                string.IsNullOrEmpty(nuevo.Nombre) ||
+                string.IsNullOrEmpty(nuevo.Apellido) ||
+                string.IsNullOrEmpty(nuevo.Direccion) ||
+                string.IsNullOrEmpty(nuevo.Ciudad) ||
+                string.IsNullOrEmpty(nuevo.CP.ToString()) ||
+                nuevo.Documento.Length > 50 ||
+                nuevo.Email.Length > 50 ||
+                nuevo.Nombre.Length > 50 ||
+                nuevo.Apellido.Length > 50 ||
+                nuevo.Direccion.Length > 50 ||
+                nuevo.Ciudad.Length > 50 ||
+                nuevo.CP.ToString().Length > 50)
+                return;
+
             try
             {
                 datos.setearConsulta(@"INSERT INTO Clientes (Documento, Nombre, Apellido, 
@@ -29,13 +45,13 @@ namespace Negocio
                 datos.setearParametro("@direccion", nuevo.Direccion);
                 datos.setearParametro("@ciudad", nuevo.Ciudad);
                 datos.setearParametro("@cp", nuevo.CP);
-                
+
                 datos.ejecutarAccion();
             }
-            catch (global::System.Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {
@@ -69,9 +85,9 @@ namespace Negocio
 
                 return null; // No existe
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {
@@ -82,6 +98,22 @@ namespace Negocio
         public void modificar(Cliente cliente)
         {
             AccesoDatos datos = new AccesoDatos();
+            if (string.IsNullOrEmpty(cliente.Documento) ||
+                string.IsNullOrEmpty(cliente.Email) ||
+                string.IsNullOrEmpty(cliente.Nombre) ||
+                string.IsNullOrEmpty(cliente.Apellido) ||
+                string.IsNullOrEmpty(cliente.Direccion) ||
+                string.IsNullOrEmpty(cliente.Ciudad) ||
+                string.IsNullOrEmpty(cliente.CP.ToString()) ||
+                cliente.Documento.Length > 50 || 
+                cliente.Email.Length > 50 ||
+                cliente.Nombre.Length > 50||
+                cliente.Apellido.Length > 50 ||
+                cliente.Direccion.Length > 50||
+                cliente.Ciudad.Length  > 50 || 
+                cliente.CP.ToString().Length > 50)
+                return;
+
             try
             {
                 datos.setearConsulta(@"UPDATE Clientes
@@ -103,9 +135,9 @@ namespace Negocio
 
                 datos.ejecutarAccion();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {

@@ -46,20 +46,21 @@ namespace WebApp
             if (voucher == null)
             {
                 errorVoucher.IsValid = false;
-                errorVoucher.ErrorMessage = "¡Voucher inexistente!";
+                errorVoucher.ErrorMessage = "¡Voucher inexistente! Regresando al inicio...";
 
                 //Setear refresh a 3 segundos. 
                 HtmlMeta meta = new HtmlMeta();
                 meta.HttpEquiv = "refresh";
-                meta.Content = "3;url=Default.aspx";
+                meta.Content = "2;url=Default.aspx";
                 Page.Header.Controls.Add(meta);
+                txtCodigoVoucher.ReadOnly = true;
                 return;
             }
 
             if (!voucherNegocio.voucherEsCanjeable(voucher))
             {
                 errorVoucher.IsValid = false;
-                errorVoucher.ErrorMessage = "¡El Voucher ya fue canjeado!";
+                errorVoucher.ErrorMessage = "¡El voucher ya fue canjeado!";
                 return;
             }
 

@@ -52,6 +52,12 @@ namespace Negocio
         public bool asignarVoucher(int idCliente, int idArticulo, string voucher)
         {
             AccesoDatos datos = null;
+            if (string.IsNullOrEmpty(idCliente.ToString()) ||
+                string.IsNullOrEmpty(idArticulo.ToString()) ||
+                string.IsNullOrEmpty(voucher) ||
+                voucher.Length > 50)
+                return false;
+
             try
             {
                 datos = new AccesoDatos();
