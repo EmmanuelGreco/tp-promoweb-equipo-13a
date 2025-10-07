@@ -22,6 +22,8 @@ SELECT * FROM Vouchers
 -- Para probar el carousel con cantidad variable de fotos
 -- UPDATE IMAGENES SET IdArticulo = 2 WHERE Id = 3
 
+-- SELECT * FROM Vouchers WHERE CodigoVoucher = 'Codigo02'
+
 -- DELETE FROM Clientes WHERE Id = x
 
 -- UPDATE Vouchers SET IdCliente = NULL, FechaCanje = NULL, IdArticulo = NULL WHERE CodigoVoucher = 'Codigo02'

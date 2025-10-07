@@ -26,7 +26,7 @@ namespace WebApp
                 Articulo articuloSeleccionado = articuloNegocio.listar().FirstOrDefault(a => a.Id == idArticulo);
 
                 lblMensaje.Text = $"El voucher &quot;<strong>{Session["voucher"]}</strong>&quot; fue canjeado correctamente. " +
-                    $"Ya estás participando por el artículo &quot;<strong>{articuloSeleccionado.Nombre}</strong>&quot;.";
+                    $"Ya está participando por el artículo &quot;<strong>{articuloSeleccionado.Nombre}</strong>&quot;.";
 
                 Session.Remove("voucher");
                 Session.Remove("IdArticuloSeleccionado");

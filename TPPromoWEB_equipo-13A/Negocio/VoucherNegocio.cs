@@ -16,7 +16,7 @@ namespace Negocio
             {
                 datos = new AccesoDatos();
                 // Lo hago Case Sensitive con COLLATE SQL_Latin1_General_CP1_CS_AS
-                datos.setearConsulta("SELECT * FROM Vouchers WHERE codigoVoucher " +
+                datos.setearConsulta("SELECT * FROM Vouchers WHERE CodigoVoucher " +
                                      "COLLATE SQL_Latin1_General_CP1_CS_AS = @voucher");
                 datos.limpiarParametros();
                 datos.setearParametro("@voucher", codigoVoucher);
